@@ -21,22 +21,28 @@ public class PartTwo {
      */
     public static void plot(String[][] data, int width) {
 
-        // find max value
+        // find max value and length of max value
         double max = 0;
+        int max_x = 0; 
         for (int i = 0; i < data.length; i++) {
             if (max < Double.parseDouble(data[i][1]))
                 max = Double.parseDouble(data[i][1]);
+            if (max_x < data[i][0].length())
+                max_x = data[i][0].length();
         }
 
         double[] values = new double[data.length];
         double[] rolling_ave = new double[data.length];
+        
+        // for string formatting
+        String max_y = (int)max +"";
         
         // populate values array with raw y values
         for (int i = 0; i < data.length; i++) values[i] = Double.parseDouble(data[i][1]);
 
         // populate rolling_average[] with rolling averages of values[]
         rolling_ave = A1Q1.rollingAverage(values, width);
-        
+
         // scale the values to 40 dashes
         for (int i = 0; i < data.length; i++) {
             double num_dashes = (Double.parseDouble(data[i][1]) / max) * 40;
@@ -62,8 +68,9 @@ public class PartTwo {
                         dashes.append(" ");
                 }
             }
+
             // format and print to console
-            System.out.println(String.format("%11s |%-40s%11.3f", data[i][0], dashes, Float.valueOf(data[i][1])));
+            System.out.println(String.format("%" + max_x + "s |%-40s    %"+ (max_y.length() + (max_y.length() + (5 - max_y.length()))) +".3f", data[i][0], dashes, Float.valueOf(data[i][1])));
         }
     }
     public static void main(String[] args) {
