@@ -1,0 +1,50 @@
+// Test 1
+// TESTING - location box1 < location box2
+box1 = new SpecificBox("Dogs", "Ajax", 17);
+box2 = new SpecificBox("Dogs", "Ottawa", 7);
+expected = -1;                   // an integer
+actual = box1.compareTo(box2);
+
+// Test 2
+// TESTING - location box1 > location box2
+box1 = new SpecificBox("Dogs", "Ottawa", 7);
+box2 = new SpecificBox("Dogs", "Ajax", 17);
+expected = 1;                   // an integer
+actual = box1.compareTo(box2);
+
+// Test 3
+// TESTING - location box1 = location box2, box1 label length < box2 label length
+box1 = new SpecificBox("Cat", "Ottawa", 12);
+box2 = new SpecificBox("Dogs", "Ottawa", 7);
+expected = -2;                   // an integer
+actual = box1.compareTo(box2);
+
+// Test 4
+// TESTING - location box1 = location box2, box1 label length > box2 label length
+box1 = new SpecificBox("Dogs", "Ottawa", 7);
+box2 = new SpecificBox("Cat", "Ottawa", 12);
+expected = 2;                   // an integer
+actual = box1.compareTo(box2);
+
+// Test 5
+// TESTING - location box1 = location box2, box1 label length = box2 label length, size box1 < size box2
+box1 = new SpecificBox("Cat", "Ottawa", 7);
+box2 = new SpecificBox("Cat", "Ottawa", 12);
+expected = -3;                   // an integer
+actual = box1.compareTo(box2);
+
+// Test 6
+// TESTING - location box1 = location box2, box1 label length = box2 label length, size box1 > size box2
+box1 = new SpecificBox("Cat", "Ottawa", 12);
+box2 = new SpecificBox("Cat", "Ottawa", 7);
+expected = 3;                   // an integer
+actual = box1.compareTo(box2);
+
+// Test 7
+// TESTING - all conditions are equivalent
+box1 = new SpecificBox("Cat", "Ottawa", 7);
+box2 = new SpecificBox("Cat", "Ottawa", 7);
+expected = 0;                   // an integer
+actual = box1.compareTo(box2);
+
+There are 7 possible outputs, -1, 1, -2, 2, -3, 3, 0. These 7 test cases produce 1 of each possible output ensuring every line of code is executed at least once.

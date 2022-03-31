@@ -1,0 +1,21 @@
+(A)
+initial: [QD, 9H, JD, AD]
+   it 1: [9H, QD, AD, JD]
+   it 2: [9H, AD, QD, JD]
+   it 3: [AD, 9H, QD, JD]
+   it 4: [AD, 9H, QD, JD]
+
+(B)
+initial: [QD, 9H, JD, AD]
+   it 1: [9H, QD, JD, AD]
+   it 2: [QD, JD, 9H, AD]
+   it 3: [QD, JD, 9H, AD]
+
+(C)
+initial: [QD, 9H, JD, AD]
+   it 1: [QD, JD, AD, 9H]
+   it 2: [JD, AD, QD, 9H]
+   it 3: [AD, JD, QD, 9H]
+   it 4: [AD, JD, QD, 9H]
+
+There are two interpretations of the red line so depending on which version is used, a different Card's toCompare() might be used (if two adjacent cards are of two different types). For example, take a list with {Card1, Card2}. Using version 1 translates to Card1.compareTo(Card2), which calls Card1's compareTo() method. However, version 2 translates to Card2.compareTo(Card1), which will call Card2's compareTo() method. Because n is reduced by 1 after each iteration, the algorithm will not keep repeating to see if the right-most value is the highest value according to both compareTo() methods and is instead locked into place, regardless of whether or not it should be there. This is why care must be taken with different subclasses with different compareTo overrides, because the final list will not only be unsorted, but could also be two different kinds of unsorted depending on the interpretation of the bubble sort algorithm, which makes it even harder to troubleshoot.
