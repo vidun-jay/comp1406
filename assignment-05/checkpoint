@@ -1,0 +1,86 @@
+import java.util.Deque;
+import java.util.ArrayDeque;
+
+/* -----------------------------------------
+   Note: The ArrayDeque is an implementation
+         of the Deque ADT. That is, it is a
+		 double-ended queue.
+
+		 You can simulate both a Stack and
+		 a regular Queue with this data structure
+		 in the following way:
+
+		 Stack: push  ~ addFirst
+		        pop   ~ removeFirst
+
+		 Queue: enqueue ~ addLast
+		        dequeue ~ removeFirst
+  ------------------------------------------ */
+
+public class MyBlobs extends Blobs {
+
+	// do NOT change or remove this constructor. We will use it to create
+	// objects when testing your code. If it is removed, we cannot test
+	// your code!
+	public MyBlobs(){}
+
+
+	@Override
+	public void blobRecursiveHelper(int row, int col, Deque<Pixel> blobSoFar) {
+
+		/*
+			if (row, col) is explored:
+				exit
+			else
+				mark as visited
+				add its position to blobSoFar
+
+			if (row - 1, col) is not visited AND not out of bounds:
+				blobRecursiveHelper(row - 1, col, blobSoFar)
+			if (row, col + 1) is not visited AND not out of bounds:
+				blobRecursiveHelper(row, col + 1, blobSoFar)
+			if (row + 1, col) is not visited AND not out of bounds:
+				blobRecursiveHelper(row + 1, col, blobSoFar)
+			if (row, col - 1) is not visited AND not out of bounds:
+				blobRecursiveHelper(row, col - 1, blobSoFar)
+		*/
+
+		/** TODO:
+		 * Figure out why tf this doesn't work
+		 	* Explore is going in a weird order
+		 */
+
+		// if pixel is explored or invalid
+		if (image.getPixel(row, col).visited || row - 1 < 0 || col >= image.cols || row >= image.rows || col - 1 < 0) {
+			return; // end explore
+		} else {
+			image.getPixel(row, col).setVisited(true); // mark pixel as visited
+			blobSoFar.addLast(image.getPixel(row, col)); // add to end of queue
+		}
+
+		// if it hasn't been visited and it's within bounds, explore up
+		if (row - 1 >= 0 && !image.getPixel(row - 1, col).visited) {
+			blobRecursiveHelper(row - 1, col, blobSoFar);
+		}
+
+		// if it hasn't been visited and it's within bounds, explore right
+		if (col + 1 <= (image.cols - 1) && !image.getPixel(row, col + 1).visited) { // TODO: get rid of +1 / -1, redundant
+			blobRecursiveHelper(row, col + 1, blobSoFar);
+		}
+
+		// if it hasn't't been visited and it's within bounds, explore down
+		if (row + 1 <= (image.rows - 1) && !image.getPixel(row + 1, col).visited) { // TODO: get rid of +1 / -1, redundant
+			blobRecursiveHelper(row + 1, col, blobSoFar);
+		}
+
+		// if it hasn't been visited and it's within bounds, explore left
+		if (col - 1 >= 0 && !image.getPixel(row, col - 1).visited) {
+			blobRecursiveHelper(row, col - 1, blobSoFar);
+		}
+	}
+
+	// TODO:
+	@Override
+	public Deque<Pixel> blobIterative(int row, int col) {return new ArrayDeque<Pixel>();}
+
+}
